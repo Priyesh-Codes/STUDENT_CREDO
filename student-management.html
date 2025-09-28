@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Management - ADMIN Credo</title>
+    <link rel="stylesheet" href="admin-dashboard.css" />
+    <link rel="stylesheet" href="student-management.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Admin Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <!-- Mode Toggle -->
+          <div class="mode-toggle-container">
+            <div class="mode-toggle">
+              <input type="radio" id="studentMode" name="userMode" value="student">
+              <label for="studentMode" class="mode-option">Student</label>
+              <input type="radio" id="adminMode" name="userMode" value="admin" checked>
+              <label for="adminMode" class="mode-option">Admin</label>
+              <div class="mode-slider"></div>
+            </div>
+          </div>
+          
+          <div class="logo">
+            <div class="logo-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="logo-text">
+              <span class="logo-title">ADMIN Credo</span>
+              <span class="logo-subtitle">Management Hub</span>
+            </div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="admin-dashboard.html" class="nav-item">
+            <div class="nav-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <span class="nav-text">Dashboard</span>
+          </a>
+          <a href="accreditation-status.html" class="nav-item">
+            <div class="nav-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <span class="nav-text">Accreditation Status</span>
+          </a>
+          <a href="admin-approvals.html" class="nav-item">
+            <div class="nav-icon">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <span class="nav-text">Approvals</span>
+            <span class="nav-badge" id="approvalsBadge" style="display: none;"></span>
+          </a>
+          <a href="student-management.html" class="nav-item active">
+            <div class="nav-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <span class="nav-text">Student Management</span>
+          </a>
+          <a href="analytics.html" class="nav-item">
+            <div class="nav-icon">
+              <i class="fas fa-chart-bar"></i>
+            </div>
+            <span class="nav-text">Analytics</span>
+          </a>
+          <a href="#" class="nav-item">
+            <div class="nav-icon">
+              <i class="fas fa-cog"></i>
+            </div>
+            <span class="nav-text">Settings</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="user-profile">
+            <div class="user-avatar">
+              <img src="admin-pic.jpeg" alt="Admin Profile" />
+            </div>
+            <div class="user-info">
+              <h4>Dr. Umasankar Pandey</h4>
+              <p>CSE Administrator</p>
+            </div>
+            <button class="settings-btn">
+              <i class="fas fa-cog"></i>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Student Management Header -->
+        <header class="page-header">
+          <div class="header-left">
+            <div class="header-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="header-text">
+              <h1>Student Management</h1>
+              <p>Manage student profiles, achievements, and academic records</p>
+            </div>
+          </div>
+          <div class="header-right">
+            <button class="add-student-btn">
+              <i class="fas fa-plus"></i>
+              Add Student
+            </button>
+            <button class="notifications-btn">
+              <i class="fas fa-bell"></i>
+              <span class="notification-count">3</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Search and Filter Section -->
+        <section class="search-section">
+          <div class="search-container">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" id="studentSearch" placeholder="Search students by name, roll number, or department...">
+            </div>
+            <div class="filter-controls">
+              <select id="departmentFilter" class="filter-select">
+                <option value="">All Departments</option>
+                <option value="CSE">Computer Science</option>
+                <option value="ECE">Electronics & Communication</option>
+                <option value="ME">Mechanical Engineering</option>
+                <option value="CE">Civil Engineering</option>
+                <option value="EE">Electrical Engineering</option>
+              </select>
+              <select id="yearFilter" class="filter-select">
+                <option value="">All Years</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+              </select>
+              <select id="statusFilter" class="filter-select">
+                <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+                <option value="graduated">Graduated</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Students Table Section -->
+        <section class="students-section">
+          <div class="students-card">
+            <div class="card-header">
+              <h3>
+                <i class="fas fa-list"></i>
+                Student Directory
+              </h3>
+              <div class="header-actions">
+                <button class="export-btn">
+                  <i class="fas fa-download"></i>
+                  Export
+                </button>
+                <button class="refresh-btn">
+                  <i class="fas fa-sync-alt"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="table-container">
+                <table class="students-table" id="studentsTable">
+                  <thead>
+                    <tr>
+                      <th>
+                        <input type="checkbox" id="selectAll">
+                      </th>
+                      <th>Student</th>
+                      <th>Roll Number</th>
+                      <th>Department</th>
+                      <th>Year</th>
+                      <th>Achievements</th>
+                      <th>Activity Points</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="studentsTableBody">
+                    <!-- Students will be populated by JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+              <div class="pagination-container">
+                <div class="pagination-info">
+                  Showing <span id="showingStart">1</span> to <span id="showingEnd">10</span> of <span id="totalStudents">156</span> students
+                </div>
+                <div class="pagination-controls">
+                  <button class="pagination-btn" id="prevPage" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <div class="pagination-numbers" id="paginationNumbers">
+                    <!-- Page numbers will be generated by JavaScript -->
+                  </div>
+                  <button class="pagination-btn" id="nextPage">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Add Student Modal -->
+    <div class="modal" id="addStudentModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add New Student</h3>
+          <button class="modal-close" id="closeModal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="addStudentForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="studentName">Full Name</label>
+                <input type="text" id="studentName" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="rollNumber">Roll Number</label>
+                <input type="text" id="rollNumber" name="rollNumber" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="department">Department</label>
+                <select id="department" name="department" required>
+                  <option value="">Select Department</option>
+                  <option value="CSE">Computer Science</option>
+                  <option value="ECE">Electronics & Communication</option>
+                  <option value="ME">Mechanical Engineering</option>
+                  <option value="CE">Civil Engineering</option>
+                  <option value="EE">Electrical Engineering</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="year">Year</label>
+                <select id="year" name="year" required>
+                  <option value="">Select Year</option>
+                  <option value="1">1st Year</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="section">Section</label>
+                <input type="text" id="section" name="section" placeholder="e.g., A1, B2">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+              <button type="submit" class="btn-primary">Add Student</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="shared-utils.js"></script>
+    <script src="student-management.js"></script>
+    <script>
+        // Initialize mode toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeModeToggle();
+            updateApprovalsBadge();
+            initializeNavigation();
+        });
+
+        function initializeModeToggle() {
+            const studentMode = document.getElementById('studentMode');
+            const adminMode = document.getElementById('adminMode');
+            
+            // Admin mode is checked by default
+            adminMode.checked = true;
+            localStorage.setItem('userMode', 'admin');
+            
+            // Add event listeners
+            studentMode.addEventListener('change', function() {
+                if (this.checked) {
+                    localStorage.setItem('userMode', 'student');
+                    window.location.href = 'index.html';
+                }
+            });
+        }
+
+        function updateApprovalsBadge() {
+            // Get pending approvals count from shared data manager
+            if (window.studentCredoData) {
+                const approvalStats = window.studentCredoData.getApprovalStats();
+                const badge = document.getElementById('approvalsBadge');
+                if (badge) {
+                    badge.textContent = approvalStats.pending;
+                    // Hide badge if count is 0
+                    badge.style.display = approvalStats.pending > 0 ? 'inline' : 'none';
+                }
+            }
+        }
+
+        function initializeNavigation() {
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // Only prevent default for placeholder links (no notifications)
+                    const href = this.getAttribute('href');
+                    if (href === '#' || !href) {
+                        e.preventDefault();
+                        
+                        // Remove active class from all items
+                        navItems.forEach(nav => nav.classList.remove('active'));
+                        
+                        // Add active class to clicked item
+                        this.classList.add('active');
+                    }
+                    // For actual links (admin-dashboard.html, student-management.html, etc.), 
+                    // allow normal navigation without any interference
+                });
+            });
+        }
+
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+                color: white;
+                padding: 16px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 10000;
+                max-width: 300px;
+                font-size: 14px;
+                font-weight: 500;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+    </script>
+  </body>
+</html>

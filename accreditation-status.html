@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accreditation Status - ADMIN Credo</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Admin Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <!-- Mode Toggle -->
+                <div class="mode-toggle-container">
+                    <div class="mode-toggle">
+                        <input type="radio" id="studentMode" name="userMode" value="student">
+                        <label for="studentMode" class="mode-option">Student</label>
+                        <input type="radio" id="adminMode" name="userMode" value="admin" checked>
+                        <label for="adminMode" class="mode-option">Admin</label>
+                        <div class="mode-slider"></div>
+                    </div>
+                </div>
+                
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">ADMIN Credo</span>
+                        <span class="logo-subtitle">Management Hub</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="accreditation-status.html" class="nav-item active">
+                    <div class="nav-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <span class="nav-text">Accreditation Status</span>
+                </a>
+                <a href="admin-approvals.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <span class="nav-text">Approvals</span>
+                    <span class="nav-badge" id="approvalsBadge" style="display: none;"></span>
+                </a>
+                <a href="student-management.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span class="nav-text">Student Management</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <span class="nav-text">Analytics</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+{{ ... }}
+                        <img src="admin-pic.jpeg" alt="Admin Profile" />
+                    </div>
+                    <div class="user-info">
+                        <h4>Dr. Umasankar Pandey</h4>
+                        <p>CSE Administrator</p>
+                    </div>
+                    <button class="settings-btn">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <header class="page-header">
+                <div class="header-left">
+                    <div class="header-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1>Accreditation Status</h1>
+                        <p>Monitor and manage institutional accreditation standards</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="date-range-selector">
+                        <select id="dateRange" class="date-select">
+                            <option value="current">Current Status</option>
+                            <option value="6months">Last 6 Months</option>
+                            <option value="1year" selected>Last Year</option>
+                            <option value="all">All Time</option>
+                        </select>
+                    </div>
+                    <button class="export-report-btn">
+                        <i class="fas fa-download"></i>
+                        Export Report
+                    </button>
+                </div>
+            </header>
+
+            <!-- Key Metrics Section -->
+            <section class="metrics-section">
+                <div class="metrics-grid">
+                    <div class="metric-card success">
+                        <div class="metric-header">
+                            <div class="metric-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h3>Accredited Programs</h3>
+                                <p>Successfully Certified</p>
+                            </div>
+                        </div>
+                        <div class="metric-value">
+                            <span class="metric-number">8</span>
+                            <span class="metric-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +2 this year
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card warning">
+                        <div class="metric-header">
+                            <div class="metric-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h3>Under Review</h3>
+                                <p>Programs Being Evaluated</p>
+                            </div>
+                        </div>
+                        <div class="metric-value">
+                            <span class="metric-number">2</span>
+                            <span class="metric-change neutral">
+                                <i class="fas fa-minus"></i>
+                                No change
+                            </span>
+                        </div>
+                    </div>
+                    
+                   
+                    
+                    <div class="metric-card info">
+                        <div class="metric-header">
+                            <div class="metric-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h3>Overall Rating</h3>
+                                <p>Institutional Grade</p>
+                            </div>
+                        </div>
+                        <div class="metric-value">
+                            <span class="metric-number">A+</span>
+                            <span class="metric-change positive">
+                                <i class="fas fa-trophy"></i>
+                                Excellent
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Accreditation Content -->
+            <div class="dashboard-content">
+                <!-- Program Status Card -->
+                <div class="admin-card" style="grid-column: 1 / -1;">
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-list-alt"></i>
+                            Program Accreditation Status
+                        </h3>
+                        <button class="view-all-btn">Export Report</button>
+                    </div>
+                    <div class="card-content">
+                        <div class="accreditation-table">
+                            <div class="table-header">
+                                <div class="table-cell">Program</div>
+                                <div class="table-cell">Status</div>
+                                <div class="table-cell">Accrediting Body</div>
+                                <div class="table-cell">Valid Until</div>
+                                <div class="table-cell">Next Review</div>
+                                <div class="table-cell">Actions</div>
+                            </div>
+                            
+                            <div class="table-row">
+                                <div class="table-cell">
+                                    <div class="program-info">
+                                        <strong>Computer Science Engineering</strong>
+                                        <span>B.Tech CSE</span>
+                                    </div>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="status-badge accredited">Accredited</span>
+                                </div>
+                                <div class="table-cell">AICTE</div>
+                                <div class="table-cell">Dec 2026</div>
+                                <div class="table-cell">Jun 2025</div>
+                                <div class="table-cell">
+                                    <div class="action-buttons">
+                                        <button class="action-btn view" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn edit" title="Edit Program">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="table-row">
+                                <div class="table-cell">
+                                    <div class="program-info">
+                                        <strong>Electronics & Communication</strong>
+                                        <span>B.Tech ECE</span>
+                                    </div>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="status-badge accredited">Accredited</span>
+                                </div>
+                                <div class="table-cell">AICTE</div>
+                                <div class="table-cell">Dec 2026</div>
+                                <div class="table-cell">Jun 2025</div>
+                                <div class="table-cell">
+                                    <div class="action-buttons">
+                                        <button class="action-btn view" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn edit" title="Edit Program">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="table-row">
+                                <div class="table-cell">
+                                    <div class="program-info">
+                                        <strong>Mechanical Engineering</strong>
+                                        <span>B.Tech ME</span>
+                                    </div>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="status-badge under-review">Under Review</span>
+                                </div>
+                                <div class="table-cell">AICTE</div>
+                                <div class="table-cell">-</div>
+                                <div class="table-cell">In Progress</div>
+                                <div class="table-cell">
+                                    <div class="action-buttons">
+                                        <button class="action-btn view" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn edit" title="Update Status">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="table-row">
+                                <div class="table-cell">
+                                    <div class="program-info">
+                                        <strong>Master of Computer Applications</strong>
+                                        <span>MCA</span>
+                                    </div>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="status-badge accredited">Accredited</span>
+                                </div>
+                                <div class="table-cell">UGC</div>
+                                <div class="table-cell">Mar 2027</div>
+                                <div class="table-cell">Sep 2025</div>
+                                <div class="table-cell">
+                                    <div class="action-buttons">
+                                        <button class="action-btn view" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="action-btn edit" title="Edit Program">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="table-row">
+                                <div class="table-cell">
+                                    <div class="program-info">
+                                        <strong>Data Science & Analytics</strong>
+                                        <span>B.Tech DSA</span>
+                                    </div>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="status-badge under-review">Under Review</span>
+                                </div>
+                                <div class="table-cell">AICTE</div>
+                                <div class="table-cell">-</div>
+                                <div class="table-cell">In Progress</div>
+                                <div class="table-cell">
+                                    <button class="action-btn edit">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compliance Checklist -->
+                <div class="admin-card">
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-clipboard-check"></i>
+                            Compliance Checklist
+                        </h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="compliance-list">
+                            <div class="compliance-item completed">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Faculty Qualification Standards</span>
+                            </div>
+                            <div class="compliance-item completed">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Infrastructure Requirements</span>
+                            </div>
+                            <div class="compliance-item completed">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Library Resources</span>
+                            </div>
+                            <div class="compliance-item pending">
+                                <i class="fas fa-clock"></i>
+                                <span>Laboratory Equipment Update</span>
+                            </div>
+                            <div class="compliance-item completed">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Student Support Services</span>
+                            </div>
+                            <div class="compliance-item pending">
+                                <i class="fas fa-clock"></i>
+                                <span>Industry Collaboration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Deadlines -->
+                <div class="admin-card">
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-calendar-exclamation"></i>
+                            Upcoming Deadlines
+                        </h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="deadline-list">
+                            <div class="deadline-item urgent">
+                                <div class="deadline-date">
+                                    <span class="day">15</span>
+                                    <span class="month">Feb</span>
+                                </div>
+                                <div class="deadline-info">
+                                    <h4>Annual Report Submission</h4>
+                                    <p>AICTE compliance report</p>
+                                </div>
+                            </div>
+                            
+                            <div class="deadline-item warning">
+                                <div class="deadline-date">
+                                    <span class="day">28</span>
+                                    <span class="month">Mar</span>
+                                </div>
+                                <div class="deadline-info">
+                                    <h4>Faculty Evaluation</h4>
+                                    <p>Performance assessment due</p>
+                                </div>
+                            </div>
+                            
+                            <div class="deadline-item normal">
+                                <div class="deadline-date">
+                                    <span class="day">10</span>
+                                    <span class="month">Jun</span>
+                                </div>
+                                <div class="deadline-info">
+                                    <h4>Infrastructure Audit</h4>
+                                    <p>Facility inspection scheduled</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="shared-utils.js"></script>
+    <script src="admin-dashboard.js"></script>
+    <script>
+        // Initialize mode toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // initializeModeToggle() is already called by admin-dashboard.js
+            initializeAccreditationPage();
+            // updateApprovalsBadge() is handled by admin-dashboard.js updateAdminStats()
+            // initializeNavigation() is already called by admin-dashboard.js
+        });
+
+        function initializeAccreditationPage() {
+            // Add event listeners for view buttons
+            const viewBtns = document.querySelectorAll('.action-btn.view');
+            viewBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const row = this.closest('.table-row');
+                    const programName = row.querySelector('.program-info strong').textContent;
+                    viewProgramDetails(programName, row);
+                });
+            });
+
+            // Add event listeners for update buttons
+            const updateBtns = document.querySelectorAll('.action-btn.edit');
+            updateBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const row = this.closest('.table-row');
+                    const programName = row.querySelector('.program-info strong').textContent;
+                    showUpdateModal(programName, row);
+                });
+            });
+
+            // Refresh button
+            const refreshBtn = document.querySelector('.refresh-btn');
+            if (refreshBtn) {
+                refreshBtn.addEventListener('click', function() {
+                    showNotification('Refreshing accreditation status...', 'info');
+                    setTimeout(() => {
+                        showNotification('Status updated successfully!', 'success');
+                    }, 2000);
+                });
+            }
+
+            // Export report button
+            const exportBtn = document.querySelector('.view-all-btn');
+            if (exportBtn) {
+                exportBtn.addEventListener('click', exportAccreditationReport);
+            }
+        }
+
+        function viewProgramDetails(programName, row) {
+            const status = row.querySelector('.status-badge').textContent;
+            const accreditingBody = row.children[2].textContent;
+            const validUntil = row.children[3].textContent;
+            const nextReview = row.children[4].textContent;
+            
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.5); display: flex; align-items: center;
+                justify-content: center; z-index: 10001;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: white; padding: 30px; border-radius: 12px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="margin: 0; color: #1f2937;">${programName} - Accreditation Details</h2>
+                        <button onclick="this.closest('.modal-overlay').remove()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #6b7280;">&times;</button>
+                    </div>
+                    
+                    <div style="display: grid; gap: 20px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <h4 style="margin: 0 0 8px 0; color: #374151;">Status</h4>
+                                <span class="status-badge ${status.toLowerCase().replace(' ', '-')}" style="display: inline-block;">${status}</span>
+                            </div>
+                            <div>
+                                <h4 style="margin: 0 0 8px 0; color: #374151;">Accrediting Body</h4>
+                                <p style="margin: 0; color: #6b7280;">${accreditingBody}</p>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <h4 style="margin: 0 0 8px 0; color: #374151;">Valid Until</h4>
+                                <p style="margin: 0; color: #6b7280;">${validUntil}</p>
+                            </div>
+                            <div>
+                                <h4 style="margin: 0 0 8px 0; color: #374151;">Next Review</h4>
+                                <p style="margin: 0; color: #6b7280;">${nextReview}</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 style="margin: 0 0 12px 0; color: #374151;">Compliance Requirements</h4>
+                            <div style="display: grid; gap: 8px;">
+                                <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: #dcfce7; border-radius: 6px;">
+                                    <i class="fas fa-check-circle" style="color: #166534;"></i>
+                                    <span style="color: #166534; font-size: 14px;">Faculty Qualifications Met</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: #dcfce7; border-radius: 6px;">
+                                    <i class="fas fa-check-circle" style="color: #166534;"></i>
+                                    <span style="color: #166534; font-size: 14px;">Infrastructure Standards Compliant</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: #dcfce7; border-radius: 6px;">
+                                    <i class="fas fa-check-circle" style="color: #166534;"></i>
+                                    <span style="color: #166534; font-size: 14px;">Curriculum Standards Met</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 24px; text-align: right;">
+                        <button onclick="this.closest('.modal-overlay').remove()" style="background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 500;">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function showUpdateModal(programName, row) {
+            showNotification('Update functionality would allow editing program status and details', 'info');
+        }
+
+        function exportAccreditationReport() {
+            showNotification('Generating accreditation report...', 'info');
+            
+            // Collect accreditation data
+            const reportData = {
+                generatedDate: new Date().toISOString(),
+                institutionName: "Educational Institution",
+                reportType: "Accreditation Status Report",
+                programs: []
+            };
+            
+            // Extract data from table rows
+            const tableRows = document.querySelectorAll('.table-row');
+            tableRows.forEach(row => {
+                const cells = row.querySelectorAll('.table-cell');
+                const programInfo = cells[0].querySelector('.program-info');
+                
+                reportData.programs.push({
+                    name: programInfo.querySelector('strong').textContent,
+                    code: programInfo.querySelector('span').textContent,
+                    status: cells[1].querySelector('.status-badge').textContent,
+                    accreditingBody: cells[2].textContent,
+                    validUntil: cells[3].textContent,
+                    nextReview: cells[4].textContent
+                });
+            });
+            
+            // Add summary statistics
+            reportData.summary = {
+                totalPrograms: reportData.programs.length,
+                accreditedPrograms: reportData.programs.filter(p => p.status === 'Accredited').length,
+                underReview: reportData.programs.filter(p => p.status === 'Under Review').length,
+                complianceRate: Math.round((reportData.programs.filter(p => p.status === 'Accredited').length / reportData.programs.length) * 100)
+            };
+            
+            // Create and download the report
+            setTimeout(() => {
+                const reportJson = JSON.stringify(reportData, null, 2);
+                const blob = new Blob([reportJson], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `accreditation-report-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                showNotification('Accreditation report exported successfully!', 'success');
+            }, 2000);
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+                color: white;
+                padding: 16px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 10000;
+                max-width: 300px;
+                font-size: 14px;
+                font-weight: 500;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+        }
+
+        // updateApprovalsBadge() is handled by admin-dashboard.js updateAdminStats()
+    </script>
+
+    <style>
+        /* Additional styles for accreditation page */
+        .refresh-btn {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(220, 38, 38, 0.3);
+        }
+
+        .accreditation-table {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+            background: #f1f5f9;
+            font-weight: 600;
+            color: #475569;
+            font-size: 14px;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+            background: white;
+            transition: background 0.2s ease;
+        }
+
+        .table-row:hover {
+            background: #f8fafc;
+        }
+
+        .table-cell {
+            padding: 16px 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .program-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .program-info strong {
+            font-size: 14px;
+            color: #1e293b;
+        }
+
+        .program-info span {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.accredited {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-badge.under-review {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn.view {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .action-btn.edit {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .compliance-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .compliance-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .compliance-item.completed {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .compliance-item.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .compliance-item i {
+            font-size: 16px;
+        }
+
+        .deadline-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .deadline-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .deadline-item.urgent {
+            background: #fef2f2;
+            border-left-color: #ef4444;
+        }
+
+        .deadline-item.warning {
+            background: #fffbeb;
+            border-left-color: #f59e0b;
+        }
+
+        .deadline-item.normal {
+            background: #f0f9ff;
+            border-left-color: #3b82f6;
+        }
+
+        .deadline-date {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 60px;
+        }
+
+        .deadline-date .day {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .deadline-date .month {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+
+        .deadline-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .deadline-info p {
+            font-size: 13px;
+            color: #64748b;
+            margin: 0;
+        }
+    </style>
+</body>
+</html>

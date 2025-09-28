@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Passport - STUDENT Credo</title>
+    <link rel="stylesheet" href="digital-passport.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <!-- Mode Toggle -->
+                <div class="mode-toggle-container">
+                    <div class="mode-toggle">
+                        <input type="radio" id="studentMode" name="userMode" value="student" checked>
+                        <label for="studentMode" class="mode-option">Student</label>
+                        <input type="radio" id="adminMode" name="userMode" value="admin">
+                        <label for="adminMode" class="mode-option">Admin</label>
+                        <div class="mode-slider"></div>
+                    </div>
+                </div>
+                
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">STUDENT Credo</span>
+                        <span class="logo-subtitle">Achievement Hub</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="achievements.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <span class="nav-text">Achievements</span>
+                </a>
+                <a href="upload-achievement.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <span class="nav-text">Upload Achievement</span>
+                </a>
+                <a href="skills-analysis.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <span class="nav-text">Skills Analysis</span>
+                </a>
+                <a href="digital-passport.html" class="nav-item active">
+                    <div class="nav-icon">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                    <span class="nav-text">Digital Passport</span>
+                </a>
+                <a href="blockchain-credentials.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <span class="nav-text">Blockchain Credentials</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="profile-pic.jpg" alt="Profile">
+                    </div>
+                    <div class="user-info">
+                        <h4>Priyesh Kumar Kashyap</h4>
+                        <p>BT24CS063</p>
+                    </div>
+                    <button class="settings-btn">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="page-header">
+                <div class="header-left">
+                    <div class="header-icon">
+                        <i class="fas fa-passport"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1>Digital Passport</h1>
+                        <p>Your verified digital credential portfolio</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="portfolio-btn">
+                            <i class="fas fa-briefcase"></i>
+                            Create Portfolio
+                        </button>
+                        <button class="resume-btn">
+                            <i class="fas fa-file-pdf"></i>
+                            Generate Resume
+                        </button>
+                        <button class="export-btn">
+                            <i class="fas fa-download"></i>
+                            Export All
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Filter Section -->
+            <div class="content-card filter-card">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-filter"></i>
+                        Filter Digital Passport
+                    </h3>
+                </div>
+                <div class="card-content">
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <label for="passportSearch">Search</label>
+                            <div class="search-input-wrapper">
+                                <i class="fas fa-search"></i>
+                                <input 
+                                    type="text" 
+                                    id="passportSearch" 
+                                    placeholder="Search achievements..."
+                                    class="search-input"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="categoryFilter">Category</label>
+                            <div class="select-wrapper">
+                                <select id="categoryFilter" class="filter-select">
+                                    <option value="">All Categories</option>
+                                    <option value="certificate">Certificate</option>
+                                    <option value="competition-win">Competition Win</option>
+                                    <option value="competition-participate">Competition Participation</option>
+                                    <option value="workshop">Workshop</option>
+                                    <option value="internship">Internship</option>
+                                    <option value="freelancing">Freelancing</option>
+                                </select>
+                                <i class="fas fa-chevron-down select-arrow"></i>
+                            </div>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="statusFilter">Status</label>
+                            <div class="select-wrapper">
+                                <select id="statusFilter" class="filter-select">
+                                    <option value="">All Statuses</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="rejected">Rejected</option>
+                                </select>
+                                <i class="fas fa-chevron-down select-arrow"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievement Selection Section -->
+            <div class="content-card selection-card">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-check-square"></i>
+                        Select Achievements for Portfolio
+                    </h3>
+                    <div class="header-actions">
+                        <button class="select-all-btn" id="selectAllBtn">
+                            <i class="fas fa-check-double"></i>
+                            Select All
+                        </button>
+                        <button class="clear-selection-btn" id="clearSelectionBtn">
+                            <i class="fas fa-times"></i>
+                            Clear Selection
+                        </button>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="selection-summary" id="selectionSummary">
+                        <span class="selected-count">0 achievements selected</span>
+                        <div class="selection-actions">
+                            <button class="preview-btn" id="previewBtn" disabled>
+                                <i class="fas fa-eye"></i>
+                                Preview Portfolio
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Achievement Selection Grid -->
+                    <div class="achievements-selection-grid" id="achievementsGrid">
+                        <!-- Achievements will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Preview Section -->
+            <div class="content-card portfolio-preview-card" id="portfolioPreview" style="display: none;">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-briefcase"></i>
+                        Portfolio Preview
+                    </h3>
+                    <div class="header-actions">
+                        <button class="template-btn" id="templateBtn">
+                            <i class="fas fa-palette"></i>
+                            Change Template
+                        </button>
+                        <button class="download-portfolio-btn" id="downloadPortfolioBtn">
+                            <i class="fas fa-download"></i>
+                            Download Portfolio
+                        </button>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="portfolio-container" id="portfolioContainer">
+                        <!-- Portfolio content will be generated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resume Preview Section -->
+            <div class="content-card resume-preview-card" id="resumePreview" style="display: none;">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-file-pdf"></i>
+                        Resume Preview
+                    </h3>
+                    <div class="header-actions">
+                        <button class="resume-template-btn" id="resumeTemplateBtn">
+                            <i class="fas fa-layout"></i>
+                            Change Layout
+                        </button>
+                        <button class="download-resume-btn" id="downloadResumeBtn">
+                            <i class="fas fa-file-pdf"></i>
+                            Download PDF
+                        </button>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="resume-container" id="resumeContainer">
+                        <!-- Resume content will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="shared-utils.js"></script>
+    <script src="digital-passport.js"></script>
+    <script>
+        let selectedAchievements = [];
+        let currentTemplate = 'professional';
+        let currentResumeLayout = 'modern';
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeModeToggle();
+            initializeDigitalPassport();
+        });
+
+        function initializeModeToggle() {
+            const studentMode = document.getElementById('studentMode');
+            const adminMode = document.getElementById('adminMode');
+            const logoTitle = document.querySelector('.logo-title');
+            
+            const savedMode = localStorage.getItem('userMode') || 'student';
+            
+            if (savedMode === 'admin') {
+                adminMode.checked = true;
+                updateModeDisplay('admin');
+            } else {
+                studentMode.checked = true;
+                updateModeDisplay('student');
+            }
+            
+            studentMode.addEventListener('change', function() {
+                if (this.checked) {
+                    updateModeDisplay('student');
+                    localStorage.setItem('userMode', 'student');
+                }
+            });
+            
+            adminMode.addEventListener('change', function() {
+                if (this.checked) {
+                    localStorage.setItem('userMode', 'admin');
+                    window.location.href = 'admin-dashboard.html';
+                }
+            });
+            
+            function updateModeDisplay(mode) {
+                if (mode === 'admin') {
+                    logoTitle.textContent = 'ADMIN Credo';
+                } else {
+                    logoTitle.textContent = 'STUDENT Credo';
+                }
+            }
+        }
+
+        function initializeDigitalPassport() {
+            loadAchievements();
+            setupEventListeners();
+        }
+
+        function setupEventListeners() {
+            // Filter controls
+            document.getElementById('passportSearch').addEventListener('input', filterAchievements);
+            document.getElementById('categoryFilter').addEventListener('change', filterAchievements);
+            document.getElementById('statusFilter').addEventListener('change', filterAchievements);
+
+            // Header buttons
+            document.querySelector('.portfolio-btn').addEventListener('click', showPortfolioPreview);
+            document.querySelector('.resume-btn').addEventListener('click', showResumePreview);
+            document.querySelector('.export-btn').addEventListener('click', exportAll);
+
+            // Selection buttons
+            document.getElementById('selectAllBtn').addEventListener('click', selectAllAchievements);
+            document.getElementById('clearSelectionBtn').addEventListener('click', clearSelection);
+            document.getElementById('previewBtn').addEventListener('click', showPortfolioPreview);
+
+            // Portfolio buttons
+            document.getElementById('templateBtn').addEventListener('click', changeTemplate);
+            document.getElementById('downloadPortfolioBtn').addEventListener('click', downloadPortfolio);
+
+            // Resume buttons
+            document.getElementById('resumeTemplateBtn').addEventListener('click', changeResumeLayout);
+            document.getElementById('downloadResumeBtn').addEventListener('click', downloadResume);
+        }
+
+        function loadAchievements() {
+            const achievements = window.studentCredoData.getAchievements().filter(a => a.status === 'approved');
+            const grid = document.getElementById('achievementsGrid');
+            
+            if (achievements.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-achievements">
+                        <div class="empty-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>No approved achievements yet</h3>
+                        <p>Upload and get your achievements approved to create your portfolio</p>
+                        <a href="upload-achievement.html" class="upload-btn">
+                            <i class="fas fa-upload"></i>
+                            Upload Achievement
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = achievements.map(achievement => `
+                <div class="achievement-selection-card" data-id="${achievement.id}">
+                    <div class="selection-checkbox">
+                        <input type="checkbox" id="achievement-${achievement.id}" onchange="toggleAchievement('${achievement.id}')">
+                        <label for="achievement-${achievement.id}"></label>
+                    </div>
+                    <div class="achievement-content">
+                        <div class="achievement-header">
+                            <div class="achievement-category ${achievement.category}">
+                                <i class="fas fa-${getCategoryIcon(achievement.category)}"></i>
+                                <span>${formatCategory(achievement.category)}</span>
+                            </div>
+                            <div class="achievement-points">
+                                ${getAchievementPoints(achievement)} AP
+                            </div>
+                        </div>
+                        <h4>${achievement.title}</h4>
+                        <p>${achievement.description || 'No description provided'}</p>
+                        <div class="achievement-meta">
+                            <div class="achievement-date">
+                                <i class="fas fa-calendar"></i>
+                                <span>${formatDate(achievement.dateCreated)}</span>
+                            </div>
+                            <div class="achievement-skills">
+                                ${(achievement.skills || []).slice(0, 3).map(skill => 
+                                    `<span class="skill-tag">${skill}</span>`
+                                ).join('')}
+                                ${achievement.skills && achievement.skills.length > 3 ? 
+                                    `<span class="skill-more">+${achievement.skills.length - 3}</span>` : ''
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterAchievements() {
+            const searchTerm = document.getElementById('passportSearch').value.toLowerCase();
+            const selectedCategory = document.getElementById('categoryFilter').value;
+            const selectedStatus = document.getElementById('statusFilter').value;
+            
+            const cards = document.querySelectorAll('.achievement-selection-card');
+            let visibleCount = 0;
+            
+            cards.forEach(card => {
+                const achievementId = card.dataset.id;
+                const achievement = window.studentCredoData.getAchievements().find(a => a.id === achievementId);
+                
+                if (!achievement) return;
+                
+                const title = achievement.title.toLowerCase();
+                const description = (achievement.description || '').toLowerCase();
+                const category = achievement.category;
+                const status = achievement.status;
+                
+                const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                const matchesCategory = !selectedCategory || category === selectedCategory;
+                const matchesStatus = !selectedStatus || status === selectedStatus;
+                
+                if (matchesSearch && matchesCategory && matchesStatus) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Update selection summary to reflect filtered results
+            updateSelectionSummary();
+        }
+
+        function toggleAchievement(achievementId) {
+            const checkbox = document.getElementById(`achievement-${achievementId}`);
+            const achievement = window.studentCredoData.getAchievements().find(a => a.id === achievementId);
+            
+            if (checkbox.checked) {
+                selectedAchievements.push(achievement);
+            } else {
+                selectedAchievements = selectedAchievements.filter(a => a.id !== achievementId);
+            }
+            
+            updateSelectionSummary();
+        }
+
+        function selectAllAchievements() {
+            const checkboxes = document.querySelectorAll('.achievement-selection-card input[type="checkbox"]');
+            const achievements = window.studentCredoData.getAchievements().filter(a => a.status === 'approved');
+            
+            checkboxes.forEach(checkbox => checkbox.checked = true);
+            selectedAchievements = [...achievements];
+            updateSelectionSummary();
+        }
+
+        function clearSelection() {
+            const checkboxes = document.querySelectorAll('.achievement-selection-card input[type="checkbox"]');
+            checkboxes.forEach(checkbox => checkbox.checked = false);
+            selectedAchievements = [];
+            updateSelectionSummary();
+        }
+
+        function updateSelectionSummary() {
+            const count = selectedAchievements.length;
+            const countElement = document.querySelector('.selected-count');
+            const previewBtn = document.getElementById('previewBtn');
+            
+            countElement.textContent = `${count} achievement${count !== 1 ? 's' : ''} selected`;
+            previewBtn.disabled = count === 0;
+            
+            if (count > 0) {
+                previewBtn.classList.add('enabled');
+            } else {
+                previewBtn.classList.remove('enabled');
+            }
+        }
+
+        function showPortfolioPreview() {
+            if (selectedAchievements.length === 0) {
+                showNotification('Please select at least one achievement', 'warning');
+                return;
+            }
+            
+            const portfolioPreview = document.getElementById('portfolioPreview');
+            const resumePreview = document.getElementById('resumePreview');
+            
+            portfolioPreview.style.display = 'block';
+            resumePreview.style.display = 'none';
+            
+            generatePortfolio();
+            portfolioPreview.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showResumePreview() {
+            if (selectedAchievements.length === 0) {
+                showNotification('Please select at least one achievement', 'warning');
+                return;
+            }
+            
+            const portfolioPreview = document.getElementById('portfolioPreview');
+            const resumePreview = document.getElementById('resumePreview');
+            
+            portfolioPreview.style.display = 'none';
+            resumePreview.style.display = 'block';
+            
+            generateResume();
+            resumePreview.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function generatePortfolio() {
+            const container = document.getElementById('portfolioContainer');
+            const profile = window.studentCredoData.getUserProfile();
+            const stats = window.studentCredoData.getStats();
+            
+            const portfolioHTML = `
+                <div class="portfolio-template ${currentTemplate}">
+                    <div class="portfolio-header">
+                        <div class="profile-section">
+                            <div class="profile-avatar">
+                                <img src="profile-pic.jpg" alt="${profile.name}">
+                            </div>
+                            <div class="profile-info">
+                                <h1>${profile.name}</h1>
+                                <h2>${profile.rollNumber} | ${profile.department}</h2>
+                                <p class="profile-summary">
+                                    Accomplished ${profile.department} student with ${selectedAchievements.length} verified achievements 
+                                    and ${stats.activityPoints} activity points. Demonstrated excellence in various domains 
+                                    including certifications, competitions, and professional development.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="portfolio-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">${selectedAchievements.length}</div>
+                                <div class="stat-label">Achievements</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">${stats.activityPoints}</div>
+                                <div class="stat-label">Activity Points</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">${getUniqueSkills().length}</div>
+                                <div class="stat-label">Skills</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-content">
+                        <div class="achievements-section">
+                            <h3><i class="fas fa-trophy"></i> Featured Achievements</h3>
+                            <div class="achievements-grid">
+                                ${selectedAchievements.map(achievement => `
+                                    <div class="portfolio-achievement-card">
+                                        <div class="achievement-icon">
+                                            <i class="fas fa-${getCategoryIcon(achievement.category)}"></i>
+                                        </div>
+                                        <div class="achievement-info">
+                                            <h4>${achievement.title}</h4>
+                                            <p class="achievement-category">${formatCategory(achievement.category)}</p>
+                                            <p class="achievement-description">${achievement.description || 'Excellence demonstrated in this domain'}</p>
+                                            <div class="achievement-date">${formatDate(achievement.dateCreated)}</div>
+                                        </div>
+                                        <div class="achievement-points">${getAchievementPoints(achievement)} AP</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="skills-section">
+                            <h3><i class="fas fa-brain"></i> Core Skills</h3>
+                            <div class="skills-cloud">
+                                ${getUniqueSkills().map(skill => `
+                                    <span class="skill-tag">${skill}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-footer">
+                        <p>Generated on ${new Date().toLocaleDateString()} | STUDENT Credo Digital Portfolio</p>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = portfolioHTML;
+        }
+
+        function generateResume() {
+            const container = document.getElementById('resumeContainer');
+            const profile = window.studentCredoData.getUserProfile();
+            const stats = window.studentCredoData.getStats();
+            
+            const resumeHTML = `
+                <div class="resume-template ${currentResumeLayout}">
+                    <div class="resume-header">
+                        <div class="personal-info">
+                            <h1>${profile.name}</h1>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-id-card"></i>
+                                    <span>${profile.rollNumber}</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>${profile.department}</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>${profile.email || profile.rollNumber.toLowerCase() + '@university.edu'}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="resume-photo">
+                            <img src="profile-pic.jpg" alt="${profile.name}">
+                        </div>
+                    </div>
+                    
+                    <div class="resume-content">
+                        <div class="resume-section">
+                            <h3>Professional Summary</h3>
+                            <p>
+                                Dedicated ${profile.department} student with a proven track record of ${selectedAchievements.length} 
+                                verified achievements and ${stats.activityPoints} activity points. Demonstrated expertise across 
+                                multiple domains with strong analytical and problem-solving capabilities.
+                            </p>
+                        </div>
+                        
+                        <div class="resume-section">
+                            <h3>Key Achievements</h3>
+                            <div class="achievements-list">
+                                ${selectedAchievements.slice(0, 6).map(achievement => `
+                                    <div class="resume-achievement">
+                                        <div class="achievement-title">
+                                            <strong>${achievement.title}</strong>
+                                            <span class="achievement-date">${formatDate(achievement.dateCreated)}</span>
+                                        </div>
+                                        <div class="achievement-category">${formatCategory(achievement.category)}</div>
+                                        <div class="achievement-description">${achievement.description || 'Demonstrated excellence and proficiency in this area'}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="resume-section">
+                            <h3>Technical Skills</h3>
+                            <div class="skills-list">
+                                ${getUniqueSkills().map(skill => `<span class="skill-item">${skill}</span>`).join(' • ')}
+                            </div>
+                        </div>
+                        
+                        <div class="resume-section">
+                            <h3>Academic Information</h3>
+                            <div class="academic-info">
+                                <div class="academic-item">
+                                    <strong>Student ID:</strong> ${profile.rollNumber}
+                                </div>
+                                <div class="academic-item">
+                                    <strong>Department:</strong> ${profile.department}
+                                </div>
+                                <div class="academic-item">
+                                    <strong>Activity Points:</strong> ${stats.activityPoints} AP
+                                </div>
+                                <div class="academic-item">
+                                    <strong>Verified Achievements:</strong> ${selectedAchievements.length}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = resumeHTML;
+        }
+
+        function downloadPortfolio() {
+            const element = document.getElementById('portfolioContainer');
+            const opt = {
+                margin: 1,
+                filename: `${window.studentCredoData.getUserProfile().name}_Portfolio.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            showNotification('Generating portfolio PDF...', 'info');
+            
+            html2canvas(element).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF();
+                
+                const imgWidth = 210;
+                const pageHeight = 295;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                
+                let position = 0;
+                
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                
+                pdf.save(opt.filename);
+                showNotification('Portfolio PDF downloaded successfully!', 'success');
+            });
+        }
+
+        function downloadResume() {
+            const element = document.getElementById('resumeContainer');
+            const filename = `${window.studentCredoData.getUserProfile().name}_Resume.pdf`;
+            
+            showNotification('Generating resume PDF...', 'info');
+            
+            html2canvas(element).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF();
+                
+                const imgWidth = 210;
+                const pageHeight = 295;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                pdf.save(filename);
+                showNotification('Resume PDF downloaded successfully!', 'success');
+            });
+        }
+
+        function changeTemplate() {
+            const templates = ['professional', 'creative', 'minimal'];
+            const currentIndex = templates.indexOf(currentTemplate);
+            currentTemplate = templates[(currentIndex + 1) % templates.length];
+            generatePortfolio();
+            showNotification(`Template changed to ${currentTemplate}`, 'info');
+        }
+
+        function changeResumeLayout() {
+            const layouts = ['modern', 'classic', 'compact'];
+            const currentIndex = layouts.indexOf(currentResumeLayout);
+            currentResumeLayout = layouts[(currentIndex + 1) % layouts.length];
+            generateResume();
+            showNotification(`Layout changed to ${currentResumeLayout}`, 'info');
+        }
+
+        function exportAll() {
+            if (selectedAchievements.length === 0) {
+                showNotification('Please select achievements first', 'warning');
+                return;
+            }
+            
+            showNotification('Generating complete export package...', 'info');
+            
+            // Generate both portfolio and resume
+            setTimeout(() => {
+                downloadPortfolio();
+                setTimeout(() => {
+                    downloadResume();
+                }, 2000);
+            }, 1000);
+        }
+
+        // Utility functions
+        function getCategoryIcon(category) {
+            const icons = {
+                'certificate': 'certificate',
+                'competition-win': 'trophy',
+                'internship': 'briefcase',
+                'workshop': 'chalkboard-teacher',
+                'freelancing': 'laptop-code'
+            };
+            return icons[category] || 'star';
+        }
+
+        function formatCategory(category) {
+            const categories = {
+                'certificate': 'Certificate',
+                'competition-win': 'Competition Win',
+                'internship': 'Internship',
+                'workshop': 'Workshop',
+                'freelancing': 'Freelancing'
+            };
+            return categories[category] || category;
+        }
+
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        function getAchievementPoints(achievement) {
+            const pointsMap = {
+                'certificate': 5,
+                'competition-win': 30,
+                'internship': 30,
+                'workshop': 5,
+                'freelancing': 25
+            };
+            return pointsMap[achievement.category] || 5;
+        }
+
+        function getUniqueSkills() {
+            const allSkills = selectedAchievements.reduce((skills, achievement) => {
+                if (achievement.skills) {
+                    skills.push(...achievement.skills);
+                }
+                return skills;
+            }, []);
+            return [...new Set(allSkills)];
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 20px; right: 20px; z-index: 10000;
+                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : type === 'warning' ? '#f59e0b' : '#3b82f6'};
+                color: white; padding: 16px 20px; border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15); max-width: 350px;
+                font-size: 14px; font-weight: 500; transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

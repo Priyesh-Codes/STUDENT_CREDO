@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Approvals - ADMIN Credo</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <link rel="stylesheet" href="admin-approvals.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Admin Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <!-- Mode Toggle -->
+                <div class="mode-toggle-container">
+                    <div class="mode-toggle">
+                        <input type="radio" id="studentMode" name="userMode" value="student">
+                        <label for="studentMode" class="mode-option">Student</label>
+                        <input type="radio" id="adminMode" name="userMode" value="admin" checked>
+                        <label for="adminMode" class="mode-option">Admin</label>
+                        <div class="mode-slider"></div>
+                    </div>
+                </div>
+                
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">ADMIN Credo</span>
+                        <span class="logo-subtitle">Management Hub</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="accreditation-status.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <span class="nav-text">Accreditation Status</span>
+                </a>
+                <a href="admin-approvals.html" class="nav-item active">
+                    <div class="nav-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <span class="nav-text">Approvals</span>
+                    <span class="nav-badge" id="approvalsBadge" style="display: none;"></span>
+                </a>
+                <a href="student-management.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span class="nav-text">Student Management</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <span class="nav-text">Analytics</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="admin-pic.jpeg" alt="Admin Profile" />
+                    </div>
+                    <div class="user-info">
+                        <h4>Dr. Umasankar Pandey</h4>
+                        <p>CSE Administrator</p>
+                    </div>
+                    <button class="settings-btn">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Admin Approvals Header -->
+            <header class="page-header">
+                <div class="header-left">
+                    <div class="header-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1>Achievement Approvals</h1>
+                        <p>Review and approve student achievement submissions</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="date-range-selector">
+                        <select id="dateRange" class="date-select">
+                            <option value="7">Last 7 days</option>
+                            <option value="30" selected>Last 30 days</option>
+                            <option value="90">Last 90 days</option>
+                        </select>
+                    </div>
+                    
+                </div>
+            </header>
+
+        <!-- Key Metrics Section -->
+        <section class="metrics-section">
+            <div class="metrics-grid">
+                    <div class="metric-card warning">
+                        <div class="metric-header">
+                            <div class="metric-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="metric-trend up">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>8%</span>
+                            </div>
+                        </div>
+                        <div class="metric-content">
+                            <h3>Pending Review</h3>
+                            <div class="metric-value count-up" data-target="0">0</div>
+                            <p class="metric-description">Awaiting approval</p>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card success">
+                        <div class="metric-header">
+                            <div class="metric-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="metric-trend up">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>25%</span>
+                            </div>
+                        </div>
+                        <div class="metric-content">
+                            <h3>Approved Today</h3>
+                            <div class="metric-value count-up" data-target="4">0</div>
+                            <p class="metric-description">Today's approvals</p>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card info">
+                        <div class="metric-header">
+                            <div class="metric-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="metric-trend up">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>100%</span>
+                            </div>
+                        </div>
+                        <div class="metric-content">
+                            <h3>Total Approved</h3>
+                            <div class="metric-value count-up" data-target="4">0</div>
+                            <p class="metric-description">All time approvals</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Overview Section -->
+            <section class="analytics-overview">
+                <div class="analytics-grid">
+                    <!-- Approval Statistics -->
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3>
+                                <i class="fas fa-chart-pie"></i>
+                                Approval Statistics
+                            </h3>
+                            <button class="view-all-btn">View Details</button>
+                        </div>
+                        <div class="card-content">
+                            <div class="stats-breakdown">
+                                <div class="stat-item">
+                                    <div class="stat-info">
+                                        <div class="stat-icon-small approved">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <div class="stat-details">
+                                            <h4>Approved This Month</h4>
+                                            <p>Successfully processed</p>
+                                        </div>
+                                    </div>
+                                    <div class="stat-count">
+                                        <span class="count-number" data-target="4">0</span>
+                                        <div class="stat-bar">
+                                            <div class="stat-fill approved" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-item">
+                                    <div class="stat-info">
+                                        <div class="stat-icon-small pending">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <div class="stat-details">
+                                            <h4>Pending Review</h4>
+                                            <p>Awaiting decision</p>
+                                        </div>
+                                    </div>
+                                    <div class="stat-count">
+                                        <span class="count-number" data-target="0">0</span>
+                                        <div class="stat-bar">
+                                            <div class="stat-fill pending" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-item">
+                                    <div class="stat-info">
+                                        <div class="stat-icon-small rejected">
+                                            <i class="fas fa-times"></i>
+                                        </div>
+                                        <div class="stat-details">
+                                            <h4>Rejected This Month</h4>
+                                            <p>Declined submissions</p>
+                                        </div>
+                                    </div>
+                                    <div class="stat-count">
+                                        <span class="count-number" data-target="0">0</span>
+                                        <div class="stat-bar">
+                                            <div class="stat-fill rejected" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity Timeline -->
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3>
+                                <i class="fas fa-history"></i>
+                                Recent Activity
+                            </h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="activity-timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-marker approved"></div>
+                                    <div class="timeline-content">
+                                        <h4>Sample Data Initialized</h4>
+                                        <p><span class="count-up" data-target="4">0</span> sample achievements loaded for demonstration</p>
+                                        <span class="timeline-time">System startup</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="timeline-item">
+                                    <div class="timeline-marker pending"></div>
+                                    <div class="timeline-content">
+                                        <h4>System Ready</h4>
+                                        <p><span class="count-up" data-target="0">0</span> pending submissions awaiting review</p>
+                                        <span class="timeline-time">Current status</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="timeline-item">
+                                    <div class="timeline-marker approved"></div>
+                                    <div class="timeline-content">
+                                        <h4>All Achievements Verified</h4>
+                                        <p><span class="count-up" data-target="4">0</span> achievements successfully approved and verified</p>
+                                        <span class="timeline-time">Initial setup</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="timeline-item">
+                                    <div class="timeline-marker approved"></div>
+                                    <div class="timeline-content">
+                                        <h4>System Status</h4>
+                                        <p><span class="count-up" data-target="1">0</span> student profile active in the system</p>
+                                        <span class="timeline-time">Current</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Approvals Management Section -->
+            <section class="approvals-management">
+                <div class="approvals-grid">
+                    <!-- Pending Approvals Table -->
+                    <div class="chart-card" style="grid-column: 1 / -1;">
+                        <div class="chart-header">
+                            <h3>
+                                <i class="fas fa-list"></i>
+                                Pending Approvals (0)
+                            </h3>
+                            <div class="header-actions">
+                                <button class="chart-btn" data-filter="all">All</button>
+                                <button class="chart-btn active" data-filter="pending">Pending</button>
+                                <button class="chart-btn" data-filter="recent">Recent</button>
+                                <button class="select-all-btn">
+                                    <i class="fas fa-check-square"></i>
+                                    Select All
+                                </button>
+                            </div>
+                        </div>
+                    <div class="card-content">
+                        <div class="approvals-table">
+                            <div class="table-header">
+                                <div class="table-cell checkbox-cell">
+                                    <input type="checkbox" id="selectAllCheckbox">
+                                </div>
+                                <div class="table-cell">Student</div>
+                                <div class="table-cell">Achievement</div>
+                                <div class="table-cell">Category</div>
+                                <div class="table-cell">Submitted</div>
+                                <div class="table-cell">Status</div>
+                                <div class="table-cell">Actions</div>
+                            </div>
+                            
+                            <!-- Sample approval rows -->
+                            <div class="table-row" data-id="1">
+                                <div class="table-cell checkbox-cell">
+                                    <input type="checkbox" class="row-checkbox">
+                                </div>
+                                <div class="table-cell">
+                                    <div class="student-profile">
+                                        <img src="profile-pic.jpg" alt="Student" class="student-avatar">
+                                        <div class="student-details">
+                                            <strong>Priyesh Kumar Kashyap</strong>
+                                            <span>BT24CS063</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-cell">
+                                    <div class="achievement-details">
+                                        <strong>AWS Cloud Practitioner</strong>
+                                        <span>Amazon certification</span>
+                                    </div>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="category-badge certificate">Certificate</span>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="submission-time">2 days ago</span>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                                <div class="table-cell">
+                                    <div class="action-buttons">
+                                        <button class="admin-btn approve" title="Approve">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button class="admin-btn reject" title="Reject">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <button class="admin-btn view" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-row" data-id="2">
+                                <div class="table-cell checkbox-cell">
+                                    <input type="checkbox" class="row-checkbox">
+                                </div>
+                                <div class="table-cell">
+                                    <div class="student-profile">
+                                        <img src="profile-pic.jpg" alt="Student" class="student-avatar">
+                                        <div class="student-details">
+                                            <strong>Rahul Sharma</strong>
+                                            <span>BT24CS045</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-cell">
+                                    <div class="achievement-details">
+                                        <strong>SIH 2024 Winner</strong>
+                                        <span>First place hackathon</span>
+                                    </div>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="category-badge competition-win">Competition</span>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="submission-time">1 day ago</span>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                                <div class="table-cell">
+                                    <div class="action-buttons">
+                                        <button class="admin-btn approve" title="Approve">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button class="admin-btn reject" title="Reject">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <button class="admin-btn view" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-row" data-id="3">
+                                <div class="table-cell checkbox-cell">
+                                    <input type="checkbox" class="row-checkbox">
+                                </div>
+                                <div class="table-cell">
+                                    <div class="student-profile">
+                                        <img src="profile-pic.jpg" alt="Student" class="student-avatar">
+                                        <div class="student-details">
+                                            <strong>Ananya Singh</strong>
+                                            <span>BT24CS078</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-cell">
+                                    <div class="achievement-details">
+                                        <strong>TCS Internship</strong>
+                                        <span>Software development</span>
+                                    </div>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="category-badge internship">Internship</span>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="submission-time">5 hours ago</span>
+                                </div>
+                                <div class="table-cell">
+                                    <span class="status-badge pending">Pending</span>
+                                </div>
+                                <div class="table-cell">
+                                    <div class="action-buttons">
+                                        <button class="admin-btn approve" title="Approve">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button class="admin-btn reject" title="Reject">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <button class="admin-btn view" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="shared-utils.js"></script>
+    <script src="admin-dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // initializeModeToggle() is already called by admin-dashboard.js
+            initializeAdminApprovals();
+            // updateApprovalsBadge() is handled by admin-dashboard.js updateAdminStats()
+            // initializeNavigation() is already called by admin-dashboard.js
+        });
+
+        function initializeAdminApprovals() {
+            // Load pending approvals from shared storage
+            loadPendingApprovals();
+            
+            // Listen for new submissions
+            window.addEventListener('approvalsUpdated', function(event) {
+                loadPendingApprovals();
+            });
+        }
+
+        function loadPendingApprovals() {
+            const approvals = window.studentCredoData.getPendingApprovals();
+            const tableBody = document.querySelector('.approvals-table');
+            
+            // Keep the header, remove existing rows
+            const header = tableBody.querySelector('.table-header');
+            tableBody.innerHTML = '';
+            tableBody.appendChild(header);
+            
+            // Update stats
+            updateApprovalStats(approvals);
+            
+            // Add approval rows
+            approvals.filter(approval => approval.status === 'pending').forEach(approval => {
+                const row = createApprovalRow(approval);
+                tableBody.appendChild(row);
+            });
+            
+            // Update title
+            const title = document.querySelector('.card-header h3');
+            if (title) {
+                const pendingCount = approvals.filter(a => a.status === 'pending').length;
+                title.innerHTML = `<i class="fas fa-list"></i> Pending Approvals (${pendingCount})`;
+            }
+        }
+
+        function createApprovalRow(approval) {
+            const row = document.createElement('div');
+            row.className = 'table-row';
+            row.setAttribute('data-id', approval.id);
+            
+            row.innerHTML = `
+                <div class="table-cell checkbox-cell">
+                    <input type="checkbox" class="row-checkbox">
+                </div>
+                <div class="table-cell">
+                    <div class="student-profile">
+                        <img src="profile-pic.jpg" alt="Student" class="student-avatar">
+                        <div class="student-details">
+                            <strong>${approval.studentName}</strong>
+                            <span>${approval.studentId}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-cell">
+                    <div class="achievement-details">
+                        <strong>${approval.title}</strong>
+                        <span>${approval.description ? approval.description.substring(0, 50) + '...' : 'No description'}</span>
+                    </div>
+                </div>
+                <div class="table-cell">
+                    <span class="category-badge ${approval.category}">${formatCategory(approval.category)}</span>
+                </div>
+                <div class="table-cell">
+                    <span class="submission-time">${formatTimeAgo(approval.submittedDate)}</span>
+                </div>
+                <div class="table-cell">
+                    <span class="status-badge ${approval.status}">${approval.status}</span>
+                </div>
+                <div class="table-cell">
+                    <div class="action-buttons">
+                        <button class="admin-btn approve" title="Approve" onclick="approveSubmission('${approval.id}')">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button class="admin-btn reject" title="Reject" onclick="rejectSubmission('${approval.id}')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <button class="admin-btn view" title="View Details" onclick="viewSubmissionDetails('${approval.id}')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            return row;
+        }
+
+        function formatCategory(category) {
+            const categoryMap = {
+                'certificate': 'Certificate',
+                'competition-win': 'Competition',
+                'competition-participate': 'Participation',
+                'internship': 'Internship',
+                'workshop': 'Workshop',
+                'freelancing': 'Freelancing'
+            };
+            return categoryMap[category] || category;
+        }
+
+        function formatTimeAgo(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
+            
+            if (diffInHours < 1) {
+                return 'Just now';
+            } else if (diffInHours < 24) {
+                return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+            } else {
+                const diffInDays = Math.floor(diffInHours / 24);
+                return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+            }
+        }
+
+        function approveSubmission(approvalId) {
+            const approval = window.studentCredoData.getPendingApprovals().find(a => a.id === approvalId);
+            if (!approval) return;
+            
+            if (confirm(`Approve "${approval.title}" for ${approval.studentName}?`)) {
+                window.studentCredoData.updateApprovalStatus(approvalId, 'approved');
+                showNotification(`Approved ${approval.title} for ${approval.studentName}`, 'success');
+                loadPendingApprovals();
+            }
+        }
+
+        function rejectSubmission(approvalId) {
+            const approval = window.studentCredoData.getPendingApprovals().find(a => a.id === approvalId);
+            if (!approval) return;
+            
+            const reason = prompt(`Reason for rejecting "${approval.title}":`);
+            if (reason) {
+                window.studentCredoData.updateApprovalStatus(approvalId, 'rejected', reason);
+                showNotification(`Rejected ${approval.title} for ${approval.studentName}`, 'error');
+                loadPendingApprovals();
+            }
+        }
+
+        function viewSubmissionDetails(approvalId) {
+            const approval = window.studentCredoData.getPendingApprovals().find(a => a.id === approvalId);
+            if (!approval) return;
+            
+            showNotification(`Viewing details for ${approval.title} by ${approval.studentName}`, 'info');
+        }
+
+        function updateApprovalStats(approvals) {
+            const stats = window.studentCredoData.getApprovalStats();
+            
+            // Update stat cards
+            const statNumbers = document.querySelectorAll('.stat-number');
+            if (statNumbers.length >= 4) {
+                statNumbers[0].textContent = stats.pending;
+                statNumbers[1].textContent = stats.approved;
+                statNumbers[2].textContent = stats.rejected;
+                statNumbers[3].textContent = '156'; // Keep static for now
+            }
+            
+            // Update header stats
+            const headerStats = document.querySelector('.header-stats span');
+            if (headerStats) {
+                headerStats.textContent = `${stats.pending} Pending`;
+            }
+            
+            // Update nav badge
+            const navBadge = document.querySelector('.nav-badge');
+            if (navBadge) {
+                navBadge.textContent = stats.pending;
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 20px; right: 20px; z-index: 10000;
+                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#dc2626'};
+                color: white; padding: 16px 20px; border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15); max-width: 350px;
+                font-size: 14px; font-weight: 500; transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+
+        // Count-up Animation Functions
+        function animateCountUp() {
+            const countElements = document.querySelectorAll('.count-up, .count-number');
+            
+            countElements.forEach(element => {
+                const target = parseInt(element.getAttribute('data-target'));
+                const duration = 2000; // 2 seconds
+                const increment = target / (duration / 16); // 60fps
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        element.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+                }, 16);
+            });
+        }
+
+        // Initialize count-up animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Delay the animation slightly for better effect
+            setTimeout(() => {
+                animateCountUp();
+            }, 500);
+        });
+
+        // Filter functionality for chart buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.chart-btn[data-filter]');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Filter logic would go here
+                    const filter = this.getAttribute('data-filter');
+                    console.log('Filtering by:', filter);
+                    
+                    // Re-animate counts when filter changes
+                    setTimeout(() => {
+                        animateCountUp();
+                    }, 200);
+                });
+            });
+        });
+
+        // Enhanced notification with count
+        function showNotificationWithCount(message, count, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 20px; right: 20px; z-index: 10000;
+                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#dc2626'};
+                color: white; padding: 16px 20px; border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15); max-width: 350px;
+                font-size: 14px; font-weight: 500; transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            
+            // Create count element
+            const countElement = document.createElement('span');
+            countElement.className = 'notification-count';
+            countElement.style.cssText = `
+                font-weight: 700; font-size: 18px; margin-right: 8px;
+            `;
+            
+            notification.appendChild(countElement);
+            notification.appendChild(document.createTextNode(message));
+            document.body.appendChild(notification);
+            
+            // Animate count in notification
+            let current = 0;
+            const timer = setInterval(() => {
+                current++;
+                countElement.textContent = current;
+                if (current >= count) {
+                    clearInterval(timer);
+                }
+            }, 50);
+            
+            setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+
+        // updateApprovalsBadge() is handled by admin-dashboard.js updateAdminStats()
+    </script>
+</body>
+</html>

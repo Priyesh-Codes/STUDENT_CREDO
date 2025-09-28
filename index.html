@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - STUDENT Credo</title>
+    <link rel="stylesheet" href="dashboard-new.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <!-- Mode Toggle -->
+          <div class="mode-toggle-container">
+            <div class="mode-toggle">
+              <input type="radio" id="studentMode" name="userMode" value="student" checked>
+              <label for="studentMode" class="mode-option">Student</label>
+              <input type="radio" id="adminMode" name="userMode" value="admin">
+              <label for="adminMode" class="mode-option">Admin</label>
+              <div class="mode-slider"></div>
+            </div>
+          </div>
+          
+          <div class="logo">
+            <div class="logo-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="logo-text">
+              <span class="logo-title">STUDENT Credo</span>
+              <span class="logo-subtitle">Achievement Hub</span>
+            </div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="index.html" class="nav-item active">
+            <div class="nav-icon">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            <span class="nav-text">Dashboard</span>
+          </a>
+          <a href="achievements.html" class="nav-item">
+            <div class="nav-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <span class="nav-text">Achievements</span>
+          </a>
+          <a href="upload-achievement.html" class="nav-item">
+            <div class="nav-icon">
+              <i class="fas fa-upload"></i>
+            </div>
+            <span class="nav-text">Upload Achievement</span>
+          </a>
+          <a href="skills-analysis.html" class="nav-item">
+            <div class="nav-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <span class="nav-text">Skills Analysis</span>
+          </a>
+          <a href="digital-passport.html" class="nav-item">
+            <div class="nav-icon">
+              <i class="fas fa-folder"></i>
+            </div>
+            <span class="nav-text">Digital Passport</span>
+          </a>
+          <a href="blockchain-credentials.html" class="nav-item">
+            <div class="nav-icon">
+              <i class="fas fa-link"></i>
+            </div>
+            <span class="nav-text">Blockchain Credentials</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="user-profile">
+            <div class="user-avatar">
+              <img src="profile-pic.jpg" alt="Profile" />
+            </div>
+            <div class="user-info">
+              <h4>Priyesh Kumar Kashyap</h4>
+              <p>BT24CS063</p>
+            </div>
+            <button class="settings-btn">
+              <i class="fas fa-cog"></i>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Dashboard Header -->
+        <header class="dashboard-header">
+          <div class="header-left">
+            <h1>Student Dashboard</h1>
+            <p>Welcome back, Priyesh! Here's your achievement overview.</p>
+          </div>
+          <div class="header-right">
+            <div class="header-stats">
+              <i class="fas fa-star"></i>
+              <span>0 APs</span>
+            </div>
+            <button class="notifications-btn">
+              <i class="fas fa-bell"></i>
+            </button>
+          </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+          <!-- User Profile Card -->
+          <div class="profile-card">
+            <div class="profile-header">
+              <div class="profile-avatar">
+                <img src="profile-pic.jpg" alt="Priyesh Kumar Kashyap" />
+              </div>
+              <div class="profile-info">
+                <h3>Priyesh Kumar Kashyap</h3>
+                <p>BT24CS063</p>
+                <p class="profile-details">2nd year | Section CSE A2</p>
+              </div>
+            </div>
+            <div class="profile-stats">
+              <div class="stat-item">
+                <span class="stat-number blue">0</span>
+                <span class="stat-label">Achievements</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number orange">N/A</span>
+                <span class="stat-label">GPA</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number green">0</span>
+                <span class="stat-label">Attendance</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress Card -->
+          <div class="progress-card">
+            <div class="progress-header">
+              <h3>Your Progress</h3>
+              <i class="fas fa-trophy progress-icon"></i>
+            </div>
+            <div class="activity-points">
+              <span class="points-number">0</span>
+              <span class="points-label">Activity Points</span>
+            </div>
+
+            <div class="skill-badges-section">
+              <h4>Skill Badges</h4>
+              <div class="skill-badges">
+                <div class="skill-badge coding">
+                  <i class="fas fa-code"></i>
+                </div>
+                <div class="skill-badge teamwork">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div class="skill-badge analytics">
+                  <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="skill-badge communication">
+                  <i class="fas fa-microphone"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="department-ranking">
+              <h4>Department Ranking</h4>
+              <div class="ranking-info">
+                <span class="department">Computer Science</span>
+                <span class="rank">#8 of 156</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="shared-utils.js"></script>
+    <script src="dashboard-new.js"></script>
+  </body>
+</html>

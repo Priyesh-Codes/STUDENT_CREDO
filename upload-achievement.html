@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Achievement - STUDENT Credo</title>
+    <link rel="stylesheet" href="upload-achievement.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <!-- Mode Toggle -->
+                <div class="mode-toggle-container">
+                    <div class="mode-toggle">
+                        <input type="radio" id="studentMode" name="userMode" value="student" checked>
+                        <label for="studentMode" class="mode-option">Student</label>
+                        <input type="radio" id="adminMode" name="userMode" value="admin">
+                        <label for="adminMode" class="mode-option">Admin</label>
+                        <div class="mode-slider"></div>
+                    </div>
+                </div>
+                
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">STUDENT Credo</span>
+                        <span class="logo-subtitle">Achievement Hub</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="achievements.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <span class="nav-text">Achievements</span>
+                </a>
+                <a href="upload-achievement.html" class="nav-item active">
+                    <div class="nav-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <span class="nav-text">Upload Achievement</span>
+                </a>
+                <a href="skills-analysis.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <span class="nav-text">Skills Analysis</span>
+                </a>
+                <a href="digital-passport.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                    <span class="nav-text">Digital Passport</span>
+                </a>
+                <a href="blockchain-credentials.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <span class="nav-text">Blockchain Credentials</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="profile-pic.jpg" alt="Profile">
+                    </div>
+                    <div class="user-info">
+                        <h4>Priyesh Kumar Kashyap</h4>
+                        <p>BT24CS063</p>
+                    </div>
+                    <button class="settings-btn">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Upload Achievement</h1>
+                    <p>Submit your accomplishment for faculty review and verification</p>
+                </div>
+                <div class="header-right">
+                    <button class="profile-btn">
+                        <i class="fas fa-user"></i>
+                    </button>
+                </div>
+            </header>
+
+           
+                
+
+            <!-- Achievement Form -->
+            <div class="content-card form-card">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-file-alt"></i>
+                        Achievement Details
+                    </h3>
+                </div>
+                <div class="card-content">
+                    <form id="achievementForm" class="achievement-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="achievementTitle">Achievement Title <span class="required">*</span></label>
+                                <input 
+                                    type="text" 
+                                    id="achievementTitle" 
+                                    name="title"
+                                    placeholder="e.g., AWS Cloud Practitioner Certification"
+                                    required
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Category <span class="required">*</span></label>
+                                <div class="select-wrapper">
+                                    <select id="category" name="category" required>
+                                        <option value="">Select a category</option>
+                                        <option value="certificate">
+                                            <i class="fas fa-certificate"></i>
+                                            Certificate
+                                        </option>
+                                        <option value="competition-win">
+                                            <i class="fas fa-trophy"></i>
+                                            Competition Win
+                                        </option>
+                                        <option value="competition-participate">
+                                            <i class="fas fa-users"></i>
+                                            Competition Participation
+                                        </option>
+                                        <option value="workshop">
+                                            <i class="fas fa-chalkboard-teacher"></i>
+                                            Workshop
+                                        </option>
+                                        <option value="internship">
+                                            <i class="fas fa-briefcase"></i>
+                                            Internship
+                                        </option>
+                                        <option value="freelancing">
+                                            <i class="fas fa-laptop-code"></i>
+                                            Freelancing
+                                        </option>
+                                    </select>
+                                    <i class="fas fa-chevron-down select-arrow"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea 
+                                id="description" 
+                                name="description"
+                                placeholder="Describe your achievement, what you learned, and its significance..."
+                                rows="4"
+                            ></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="skillsGained">Skills Gained</label>
+                            <div class="skills-input-container">
+                                <div class="skills-input-wrapper">
+                                    <input 
+                                        type="text" 
+                                        id="skillsInput"
+                                        placeholder="Add skill and press Enter"
+                                    >
+                                    <button type="button" class="add-skill-btn" id="addSkillBtn">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <p class="help-text">Add skills you gained or demonstrated through this achievement</p>
+                                <div class="skills-tags" id="skillsTags">
+                                    <!-- Skills will be added here dynamically -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Supporting Documents</label>
+                            <div class="upload-area" id="uploadArea">
+                                <div class="upload-icon">
+                                    <i class="fas fa-paperclip"></i>
+                                </div>
+                                <h4>Upload your certificates and proof</h4>
+                                <p class="upload-text">Accepted formats: JPG, PNG, PDF, DOC, DOCX (Max 10MB each)</p>
+                                <button type="button" class="choose-files-btn" id="chooseFilesBtn">
+                                    Choose Files
+                                </button>
+                                <input type="file" id="fileInput" multiple accept=".jpg,.jpeg,.png,.pdf,.doc,.docx" style="display: none;">
+                            </div>
+                            <div class="uploaded-files" id="uploadedFiles">
+                                <!-- Uploaded files will be shown here -->
+                            </div>
+                        </div>
+
+                    
+
+                        <div class="form-actions">
+                            <button type="button" class="cancel-btn" onclick="window.history.back()">
+                                Cancel
+                            </button>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                Submit for Review
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="shared-utils.js"></script>
+    <script src="upload-achievement.js"></script>
+    <script>
+        // Initialize mode toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeModeToggle();
+        });
+
+        function initializeModeToggle() {
+            const studentMode = document.getElementById('studentMode');
+            const adminMode = document.getElementById('adminMode');
+            const logoTitle = document.querySelector('.logo-title');
+            
+            // Check if mode is stored in localStorage
+            const savedMode = localStorage.getItem('userMode') || 'student';
+            
+            if (savedMode === 'admin') {
+                adminMode.checked = true;
+                updateModeDisplay('admin');
+            } else {
+                studentMode.checked = true;
+                updateModeDisplay('student');
+            }
+            
+            // Add event listeners
+            studentMode.addEventListener('change', function() {
+                if (this.checked) {
+                    updateModeDisplay('student');
+                    localStorage.setItem('userMode', 'student');
+                }
+            });
+            
+            adminMode.addEventListener('change', function() {
+                if (this.checked) {
+                    localStorage.setItem('userMode', 'admin');
+                    // Redirect to admin dashboard
+                    window.location.href = 'admin-dashboard.html';
+                }
+            });
+            
+            function updateModeDisplay(mode) {
+                if (mode === 'admin') {
+                    logoTitle.textContent = 'ADMIN Credo';
+                } else {
+                    logoTitle.textContent = 'STUDENT Credo';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

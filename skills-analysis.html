@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills Analysis - STUDENT Credo</title>
+    <link rel="stylesheet" href="skills-analysis.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <!-- Mode Toggle -->
+                <div class="mode-toggle-container">
+                    <div class="mode-toggle">
+                        <input type="radio" id="studentMode" name="userMode" value="student" checked>
+                        <label for="studentMode" class="mode-option">Student</label>
+                        <input type="radio" id="adminMode" name="userMode" value="admin">
+                        <label for="adminMode" class="mode-option">Admin</label>
+                        <div class="mode-slider"></div>
+                    </div>
+                </div>
+                
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">STUDENT Credo</span>
+                        <span class="logo-subtitle">Achievement Hub</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="achievements.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <span class="nav-text">Achievements</span>
+                </a>
+                <a href="upload-achievement.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <span class="nav-text">Upload Achievement</span>
+                </a>
+                <a href="skills-analysis.html" class="nav-item active">
+                    <div class="nav-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <span class="nav-text">Skills Analysis</span>
+                </a>
+                <a href="digital-passport.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                    <span class="nav-text">Digital Passport</span>
+                </a>
+                <a href="blockchain-credentials.html" class="nav-item">
+                    <div class="nav-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <span class="nav-text">Blockchain Credentials</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="profile-pic.jpg" alt="Profile">
+                    </div>
+                    <div class="user-info">
+                        <h4>Priyesh Kumar Kashyap</h4>
+                        <p>BT24CS063</p>
+                    </div>
+                    <button class="settings-btn">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="page-header">
+                <div class="header-left">
+                    <div class="header-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1>Skills Analysis</h1>
+                        <p>AI-powered insights into your skills and career development</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="refresh-btn" id="refreshBtn">
+                        <i class="fas fa-sync-alt"></i>
+                        Refresh Analysis
+                    </button>
+                </div>
+            </header>
+
+            <!-- Stats Cards -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card blue">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Total Skills</div>
+                            <div class="stat-value">0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card green">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Average Proficiency</div>
+                            <div class="stat-value">0%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card purple">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Expert Level</div>
+                            <div class="stat-value">0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card orange">
+                        <div class="stat-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Areas to Improve</div>
+                            <div class="stat-value">0</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Analysis Grid -->
+            <section class="analysis-section">
+                <div class="analysis-grid">
+                    <!-- Your Top Skills -->
+                    <div class="analysis-card top-skills-card">
+                        <div class="card-header">
+                            <div class="skills-header">
+                                <i class="fas fa-chart-line skills-icon"></i>
+                                <h3>Your Top Skills</h3>
+                            </div>
+                            <div class="card-actions">
+                                <button class="info-btn" id="skillInfoBtn" title="How skill scores are calculated">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="top-skills-list" id="skillsList">
+                                <!-- Skills will be populated dynamically by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Recommendations -->
+                    <div class="analysis-card recommendations-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-lightbulb"></i> AI Recommendations</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="empty-state">
+                                <div class="empty-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <h4>No recommendations yet.</h4>
+                                <p>Upload achievements to get personalized suggestions!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills by Category -->
+                    <div class="analysis-card skills-category-card">
+                        <div class="card-header">
+                            <h3>Skills by Category</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="empty-state">
+                                <div class="empty-icon">
+                                    <i class="fas fa-tags"></i>
+                                </div>
+                                <h4>No categorized skills yet.</h4>
+                                <p>Start uploading achievements to see skill categories!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Career Path Insights -->
+                    <div class="analysis-card career-insights-card">
+                        <div class="card-header">
+                            <h3>Career Path Insights</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="insights-section">
+                                <div class="insight-item">
+                                    <h4>Current Strengths</h4>
+                                    <p>Strong technical foundation with good problem-solving skills</p>
+                                </div>
+                                <div class="insight-item">
+                                    <h4>Suggested Path</h4>
+                                    <p>Continue building foundational skills in your chosen field</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Skill Scoring Info Modal -->
+    <div class="modal-overlay" id="skillInfoModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-calculator"></i> How Skill Scores Are Calculated</h3>
+                <button class="close-btn" onclick="closeSkillInfoModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="scoring-explanation">
+                    <p class="intro-text">Your skill percentage is calculated based on different types of achievements. Each achievement type contributes a specific amount to your overall skill score:</p>
+                    
+                    <div class="scoring-rules">
+                        <div class="rule-item">
+                            <div class="rule-icon professional">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="rule-details">
+                                <h4>Professional Certificates</h4>
+                                <p><strong>+5% each</strong> (maximum 2 certificates = 10%)</p>
+                                <span class="rule-description">Industry-recognized certifications in your skill area</span>
+                            </div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-icon competition-win">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="rule-details">
+                                <h4>Competition Win</h4>
+                                <p><strong>+30%</strong> (only 1st place counts = 30%)</p>
+                                <span class="rule-description">Winning competitions related to your skill</span>
+                            </div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-icon workshop">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="rule-details">
+                                <h4>Workshop Attendance</h4>
+                                <p><strong>+5%</strong> (only 1 counts = 5%)</p>
+                                <span class="rule-description">Attending relevant workshops or training sessions</span>
+                            </div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-icon internship">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="rule-details">
+                                <h4>Internships</h4>
+                                <p><strong>+30% each</strong> (maximum 2 internships = 60%)</p>
+                                <span class="rule-description">Practical work experience in your skill area</span>
+                            </div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-icon freelance">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="rule-details">
+                                <h4>Freelance Project</h4>
+                                <p><strong>+25%</strong> (only 1 counts = 25%)</p>
+                                <span class="rule-description">Independent projects demonstrating your skills</span>
+                            </div>
+                        </div>
+                        
+                        <div class="rule-item">
+                            <div class="rule-icon participation">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="rule-details">
+                                <h4>Competition Participation</h4>
+                                <p><strong>+1% each</strong> (maximum 5 participations = 5%)</p>
+                                <span class="rule-description">Participating in competitions (even without winning)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scoring-summary">
+                        <h4><i class="fas fa-chart-line"></i> Maximum Possible Score</h4>
+                        <div class="max-score-breakdown">
+                            <div class="score-line">
+                                <span>Professional Certificates (2×5%)</span>
+                                <span class="score-value">10%</span>
+                            </div>
+                            <div class="score-line">
+                                <span>Competition Win (1×30%)</span>
+                                <span class="score-value">30%</span>
+                            </div>
+                            <div class="score-line">
+                                <span>Workshop Attendance (1×5%)</span>
+                                <span class="score-value">5%</span>
+                            </div>
+                            <div class="score-line">
+                                <span>Internships (2×30%)</span>
+                                <span class="score-value">60%</span>
+                            </div>
+                            <div class="score-line">
+                                <span>Freelance Project (1×25%)</span>
+                                <span class="score-value">25%</span>
+                            </div>
+                            <div class="score-line">
+                                <span>Competition Participation (5×1%)</span>
+                                <span class="score-value">5%</span>
+                            </div>
+                            <div class="score-line total">
+                                <span><strong>Maximum Total</strong></span>
+                                <span class="score-value"><strong>135%</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scoring-note">
+                        <p><i class="fas fa-info-circle"></i> <strong>Note:</strong> Scores above 100% indicate exceptional achievement in that skill area. The system accounts for over-achievement to recognize outstanding performance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared-utils.js"></script>
+    <script src="skills-analysis.js"></script>
+    <script>
+        // Initialize mode toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeModeToggle();
+        });
+
+        function initializeModeToggle() {
+            const studentMode = document.getElementById('studentMode');
+            const adminMode = document.getElementById('adminMode');
+            const logoTitle = document.querySelector('.logo-title');
+            
+            // Check if mode is stored in localStorage
+            const savedMode = localStorage.getItem('userMode') || 'student';
+            
+            if (savedMode === 'admin') {
+                adminMode.checked = true;
+                updateModeDisplay('admin');
+            } else {
+                studentMode.checked = true;
+                updateModeDisplay('student');
+            }
+            
+            // Add event listeners
+            studentMode.addEventListener('change', function() {
+                if (this.checked) {
+                    updateModeDisplay('student');
+                    localStorage.setItem('userMode', 'student');
+                }
+            });
+            
+            adminMode.addEventListener('change', function() {
+                if (this.checked) {
+                    localStorage.setItem('userMode', 'admin');
+                    // Redirect to admin dashboard
+                    window.location.href = 'admin-dashboard.html';
+                }
+            });
+            
+            function updateModeDisplay(mode) {
+                if (mode === 'admin') {
+                    logoTitle.textContent = 'ADMIN Credo';
+                } else {
+                    logoTitle.textContent = 'STUDENT Credo';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
